@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "a-sketchy-site"
+version = "0.1.0"
+description = "Source for my website"
+authors = ["AnonymousDapper <dapper@a-sketchy.site>"]
+readme = "README.md"
+packages = [{include = "backend"}]
+
+[tool.poetry.scripts]
+dev = "backend:_serve_dev"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+quart = "^0.18.4"
+pygments = "^2.15.1"
+sphinx = "^6.1.3"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.12.0"
+pre-commit = "^3.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.pyright]
+pythonVersion = "3.11.1"

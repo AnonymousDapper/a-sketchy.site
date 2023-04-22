@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ '{% extends "post.html" %}' }}
+    {{ '{% block body %}' }}
+        <div role="document">
+            {{ body }}
+        </div>
+    {{ '{% endblock %}' }}
+{% endblock %}

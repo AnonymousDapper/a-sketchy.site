@@ -1,0 +1,101 @@
+{%- set preload_styles = ["main", "svelte/bundle"] -%}
+{%- set styles = [] -%}
+{%- set scripts = ["svelte/bundle"] -%}
+{%- set preload_fonts = [("Iosevka-Dapper", "woff2"), ("Iosevka-Dapper-Bold", "woff2"), ("Iosevka-Dapper-Italic", "woff2")] -%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {%- block site_meta -%}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- <meta name="color-scheme" content="light dark" /> -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        {# {%- if metatags %}{{ metatags }}{% endif -%} #}
+        {%- endblock site_meta -%}
+
+        {%- block htmltitle -%}
+        <title>{{ title|striptags|e }}</title>
+        {% endblock -%}
+
+
+        {%- block preload -%}
+        {%- for style in preload_styles %}
+        <link rel="preload" as="style" href="{{ url_for('static', filename='%s.css'|format(style)) }}" />
+        {% endfor -%}
+        <!-- {%- for font, _type in preload_fonts %}
+        <link rel="preload" as="font" type="{{ 'font/%s'|format(_type) }}" crossorigin="anonymous" href="{{ url_for('static', filename='font/%s.%s'|format(font, _type)) }}" />
+        {% endfor -%} -->
+        {%- endblock -%}
+
+        {%- block styles -%}
+        {%- for style in styles + preload_styles %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='%s.css'|format(style)) }}" media="print" onload="this.media='all'"/>
+        {% endfor -%}
+        {%- endblock -%}
+
+        {%- block extra_styles -%}
+        {%- endblock -%}
+
+        {%- block scripts -%}
+        {%- for script in scripts %}
+        <script defer src="{{ url_for('static', filename='%s.js'|format(script)) }}"></script>
+        {% endfor -%}
+
+        <script defer>
+            document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        </script>
+        {%- endblock -%}
+
+        {%- block extra_scripts -%}
+        {%- endblock -%}
+
+        {%- block extrahead -%}{%- endblock -%}
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/"><strong><u>A-sketch</u>y</strong><em>.site</em></a></li>
+            </ul>
+            {%- block extranav -%}
+            {%- endblock -%}
+        </nav>
+        {%- block prebody %}
+        {%- endblock %}
+        <main>
+            <aside>
+                <nav>
+                <details>
+                    <summary>Blog</summary>
+                    <ul>
+                        <li><a href="blog/">New Posts</a></li>
+                        <li><a href="blog/archive">Archive</a></li>
+                        <li><a href="blog/search">Search</a></li>
+                    </ul>
+                </details>
+                <details>
+                    <summary>Projects</summary>
+                    <ul>
+                        <li><a href="projects/rust">Rust</a></li>
+                        <li><a href="projects/python">Python</a></li>
+                        <li><a href="projects/">All Projects</a></li>
+                    </ul>
+                </details>
+                <details>
+                    <summary>Tools</summary>
+
+                </details>
+                    {% block sidenav %}
+                    {% endblock %}
+                </nav>
+            </aside>
+            <div class="container" id="document-body">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "page.html" %}
+{%- block htmltitle -%}
+    <title>{{ post_title|striptags|e }} - A Sketchy Blog</title>
+{% endblock -%}
+{% block extranav %}
+    <ul>
+        <li>{{ post_title|striptags|e }}</li>
+    </ul>
+{% endblock %}
+
