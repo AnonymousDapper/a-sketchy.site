@@ -12,7 +12,7 @@ else {
 }
 
 const app = new App({
-	target: document.getElementById("document-body"),
+	target: document.getElementById("content"),
 	props: {
 		component: component,
 		title: title,

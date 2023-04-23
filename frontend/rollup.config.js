@@ -36,7 +36,7 @@ export default {
 		format: 'iife',
 		name: 'app',
 		//file: 'public/build/bundle.js'
-		file: '../static/svelte/bundle.js'
+		file: '../static/bundle.js'
 	},
 	plugins: [
 		svelte({

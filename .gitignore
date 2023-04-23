@@ -149,7 +149,7 @@ pyrightconfig.json
 .vscode
 tokei.toml
 .pre-commit-config.yaml
-static/svelte/*
+static/bundle.*
 static/main.css
 
 **/.DS_Store

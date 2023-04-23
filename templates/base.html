@@ -1,101 +1,72 @@
-{%- set preload_styles = ["main", "svelte/bundle"] -%}
-{%- set styles = [] -%}
-{%- set scripts = ["svelte/bundle"] -%}
-{%- set preload_fonts = [("Iosevka-Dapper", "woff2"), ("Iosevka-Dapper-Bold", "woff2"), ("Iosevka-Dapper-Italic", "woff2")] -%}
-
+{%- set main_stylesheet_url = static_url('main.css') -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {%- block site_meta -%}
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <!-- <meta name="color-scheme" content="light dark" /> -->
-        <meta name="description" content="">
-        <meta name="author" content="">
 
-        {# {%- if metatags %}{{ metatags }}{% endif -%} #}
-        {%- endblock site_meta -%}
-
-        {%- block htmltitle -%}
-        <title>{{ title|striptags|e }}</title>
-        {% endblock -%}
-
-
-        {%- block preload -%}
-        {%- for style in preload_styles %}
-        <link rel="preload" as="style" href="{{ url_for('static', filename='%s.css'|format(style)) }}" />
-        {% endfor -%}
-        <!-- {%- for font, _type in preload_fonts %}
-        <link rel="preload" as="font" type="{{ 'font/%s'|format(_type) }}" crossorigin="anonymous" href="{{ url_for('static', filename='font/%s.%s'|format(font, _type)) }}" />
-        {% endfor -%} -->
+        <link rel="preload" as="style" href="{{ main_stylesheet_url }}" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        {%- block preloads -%}
         {%- endblock -%}
 
-        {%- block styles -%}
-        {%- for style in styles + preload_styles %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='%s.css'|format(style)) }}" media="print" onload="this.media='all'"/>
-        {% endfor -%}
+        {%- block metatags -%}
         {%- endblock -%}
 
+        <title>{%- block title -%}{{ title|striptags|e }}{%- endblock -%}</title>
+
+        <link rel="stylesheet" href="{{ main_stylesheet_url }}" media="print" onload="this.media='all'" />
+        <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Zilla+Slab:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
         {%- block extra_styles -%}
         {%- endblock -%}
 
-        {%- block scripts -%}
-        {%- for script in scripts %}
-        <script defer src="{{ url_for('static', filename='%s.js'|format(script)) }}"></script>
-        {% endfor -%}
-
+        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
         <script defer>
             document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
         </script>
-        {%- endblock -%}
-
         {%- block extra_scripts -%}
         {%- endblock -%}
 
-        {%- block extrahead -%}{%- endblock -%}
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="/"><strong><u>A-sketch</u>y</strong><em>.site</em></a></li>
-            </ul>
-            {%- block extranav -%}
-            {%- endblock -%}
-        </nav>
-        {%- block prebody %}
-        {%- endblock %}
-        <main>
-            <aside>
-                <nav>
-                <details>
-                    <summary>Blog</summary>
-                    <ul>
-                        <li><a href="blog/">New Posts</a></li>
-                        <li><a href="blog/archive">Archive</a></li>
-                        <li><a href="blog/search">Search</a></li>
-                    </ul>
-                </details>
-                <details>
-                    <summary>Projects</summary>
-                    <ul>
-                        <li><a href="projects/rust">Rust</a></li>
-                        <li><a href="projects/python">Python</a></li>
-                        <li><a href="projects/">All Projects</a></li>
-                    </ul>
-                </details>
-                <details>
-                    <summary>Tools</summary>
+        <div id="page-wrapper">
+            <div id="header-wrapper" class="mb-8 bg-white border-b-2 border-b-slate-200 shadow">
+                <header>
+                    <div class="flex my-auto mx-4 p-4 gap-x-2">
+                        <div id="brand-wrapper" class="ml-auto px-4 text-2xl">
+                            <a href="/" class="text-slate-800"><strong>A<span class="text-orange-700">-</span><u class="decoration-orange-700">sketch</u>y</strong><em><span class="text-orange-700">.</span>site</em></a>
+                        </div>
+                        <nav id="top-nav" class="basis-2/3 px-4 border-x-2 border-slate-200">
+                            <div class="mr-auto">
 
-                </details>
-                    {% block sidenav %}
-                    {% endblock %}
-                </nav>
-            </aside>
-            <div class="container" id="document-body">
-                {% block body %}
-                {% endblock %}
+                            </div>
+                        </nav>
+                        <div class="flex mr-auto px-4">
+                            <div id="theme-switcher" class="">
+                                <button class="mt-1"><span class="flex gap-x-1 justify-center text-md text-slate-600">
+                                    <iconify-icon icon="material-symbols:brightness-6-rounded" width="24" height="24" class="inline-block"></iconify-icon>
+                                    Theme</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </header>
             </div>
-        </main>
+            <div id="document-wrapper" class="flex gap-x-6 mx-40">
+                    <div class="basis-1/6">
+                    </div>
+                    <div class="basis-1/6 order-last">
+                    </div>
+
+                <div id="content" class="basis-2/3">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <footer>
+        </footer>
     </body>
 </html>
