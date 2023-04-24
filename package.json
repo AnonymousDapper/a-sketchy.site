@@ -7,11 +7,17 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "postcss -m -w static/template.tailwind.css -o static/main.css",
+    "build": "postcss --env production static/template.tailwind.css -o static/main.css"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.0",
+    "doiuse": "^4.4.1",
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
     "rollup": "^3.20.6",
     "tailwindcss": "^3.3.1"
   }

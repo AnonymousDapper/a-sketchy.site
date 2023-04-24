@@ -22,7 +22,6 @@
         {%- block extra_styles -%}
         {%- endblock -%}
 
-        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
         <script defer>
             document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme") || window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
         </script>
@@ -30,13 +29,13 @@
         {%- endblock -%}
 
     </head>
-    <body>
+    <body class="bg-stone-50">
         <div id="page-wrapper">
-            <div id="header-wrapper" class="mb-8 bg-white border-b-2 border-b-slate-200 shadow">
+            <div id="header-wrapper" class="mb-8 border-b-2 border-b-slate-200 shadow">
                 <header>
                     <div class="flex my-auto mx-4 p-4 gap-x-2">
                         <div id="brand-wrapper" class="ml-auto px-4 text-2xl">
-                            <a href="/" class="text-slate-800"><strong>A<span class="text-orange-700">-</span><u class="decoration-orange-700">sketch</u>y</strong><em><span class="text-orange-700">.</span>site</em></a>
+                            <a href="/" class="text-slate-800"><strong>A<span class="text-orange-600">-</span><u class="decoration-orange-600">sketch</u>y</strong><em><span class="text-orange-600">.</span>site</em></a>
                         </div>
                         <nav id="top-nav" class="basis-2/3 px-4 border-x-2 border-slate-200">
                             <div class="mr-auto">
@@ -45,8 +44,8 @@
                         </nav>
                         <div class="flex mr-auto px-4">
                             <div id="theme-switcher" class="">
-                                <button class="mt-1"><span class="flex gap-x-1 justify-center text-md text-slate-600">
-                                    <iconify-icon icon="material-symbols:brightness-6-rounded" width="24" height="24" class="inline-block"></iconify-icon>
+                                <button class="mt-1"><span class="flex gap-x-1 justify-center text-md text-stone-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-block"><path fill="currentColor" d="M8.675 20h-2.65q-.825 0-1.413-.588T4.026 18v-2.65L2.1 13.4q-.575-.575-.575-1.4t.575-1.4l1.925-1.95V6q0-.825.588-1.413T6.025 4h2.65l1.95-1.925q.575-.575 1.4-.575t1.4.575L15.375 4h2.65q.825 0 1.413.588T20.024 6v2.65l1.925 1.95q.575.575.575 1.4t-.575 1.4l-1.925 1.95V18q0 .825-.587 1.413T18.025 20h-2.65l-1.95 1.925q-.575.575-1.4.575t-1.4-.575L8.675 20Zm3.35-3q2.075 0 3.538-1.463T17.024 12q0-2.075-1.462-3.538T12.025 7v10Z"/></svg>
                                     Theme</span>
                                 </button>
                             </div>
